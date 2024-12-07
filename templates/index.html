@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>考生端登录</title>
+
+
+    <link href="/static/layui/css/layui.css" rel="stylesheet" />
+    <script src="/static/layui/layui.js"></script>
+    <link href="/static/css/common.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/static/css/dengpan/css/base.css">
+    <link rel="stylesheet" href="/static/css/dengpan/css/iconfont/iconfont.css">
+    <link rel="stylesheet" href="/static/css/dengpan/css/style.css">
+
+    <style>
+        .font-title {
+            font-size: 24px;
+            font-weight: bold
+        }
+
+        .font-title-download {
+            font-size: 20px;
+            /*   font-weight: bold*/
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div style="height:125px; line-height:125px;">
+        <div class="layui-row">
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+            <div class="layui-col-md5">
+                <span class="font-title" style="">{{ exam_name }}</span>
+            </div>
+            <div class="layui-col-md3">
+                <span>学生姓名：</span>
+                <span>考号：</span>
+            </div>
+            <div class="layui-col-md3">
+                <a href="/CompetitionFiles/download.zip" download="download">
+                    <i class="icon icon-download"></i>
+                    <span class="font-title-download" style="">试题下载</span>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="login-mid clearfix" style="        background-image: url('./css/dengpan/img/background1.jpeg');
+">
+        <div class="block">
+
+            <div class="layui-row">
+
+                <div class="layui-col-md6">
+
+                </div>
+                <div class="layui-col-md6">
+
+                </div>
+            </div>
+
+            <div class="login-notice  layui-form">
+                <h2>考试须知</h2>
+                <h3> {{ emsg }}</h3>
+                <div style="margin:10px">
+
+
+                </div>
+
+            </div>
+
+            <div class="login-box layui-form">
+                <h2>考生登录</h2>
+                <ul>
+                    <form action="/login" method="post">
+                        <li>
+                            <i class="icon icon-zhanghao"></i>
+                            <input id="name" name="name" type="text" placeholder="请输入准考证号" required
+                                lay-verify="required">
+                        </li>
+                        <li>
+                            <i class="icon icon-lock"></i>
+                            <input id="password" name="password" type="password" placeholder="请输入密码" required
+                                lay-verify="required" autocomplete="off">
+                        </li>
+                        <li>
+                            <i class="icon icon-gangbi"></i>
+                            <input id="idCard" name="idCard" type="text" placeholder="请输入身份证号（X大写）" required
+                                lay-verify="required" autocomplete="off">
+                        </li>
+                        <li>
+                            <i class="icon icon-area"></i>
+                            <input id="userIP" name="userIP" type="text" value="127.0.0.1" required
+                                lay-verify="required" autocomplete="off" disabled>
+
+                        </li>
+
+                        <li>
+                            <button id="submit" lay-submit lay-filter="login" type="submit">
+                                登录
+                            </button>
+                        </li>
+                    </form>
+                    <li class="tips" id="tips"></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="login-info block">
+        © COPYRIGHT 2018-2023 版权所有 version：2023-11-16
+    </div>
+
+
+
+    <script>
+
+        layui.use(['form', 'jquery', 'layer'], function () {
+            var form = layui.form,
+                layer = layui.layer;
+            var $ = layui.jquery;
+
+            //自定义验证规则
+            form.verify({
+                title: function (value) {
+                    if (value.length < 5) {
+                        return '标题至少得5个字符啊';
+                    }
+                },
+                password: [/(.+){6,12}$/, '密码必须6到12位'],
+                verity: [/(.+){6}$/, '验证码必须是6位'],
+
+            });
+
+
+            // //监听提交
+            // form.on('submit(login)', function (data) {
+
+
+            //     var dataField = data.field;
+
+            //     //var passwordNew = dataField.password;
+            //     //passwordNew = hex_md5(encodeURIComponent(passwordNew));
+            //     //dataField.password = passwordNew.toUpperCase();
+
+
+            //     $.ajax({
+            //         url: '/User/APILogin',
+            //         type: 'POST',
+            //         dataType: 'JSON',
+            //         data: dataField,
+            //         success: function (data) {
+            //             if (data.messageResult == true) {
+            //                 //跳转到后台管理页面
+
+            //                 var param = encodeURI(data.name);
+            //                 //location.href = '/Admin/Index?name=' + data.Name + '&ID=' + data.EmployeID;
+            //                 location.href = '/User/Notice';
+            //             }
+            //             else {
+            //                 layer.open({
+            //                     title: data.title
+            //                     , content: data.message
+            //                 });
+            //             }
+
+            //             //layer.msg(data.field);
+            //             //layer.alert(data);
+            //         }
+            //     });
+            //     return false;
+            // });
+
+        });
+
+
+        //更换验证码
+        function getCode(data) {
+            var d = data;
+            // debugger;
+
+            document.getElementById("img1").src = "";
+            document.getElementById("img1").src = "/CloudUser/GetValidateCode/";
+
+            var da1 = document.getElementById("img1").src;
+
+            $.ajax({
+                url: '/CloudUser/GetValidateCode/',
+                type: 'GET',
+                dataType: 'JSON',
+                data: data.id,
+                async: false,
+                success: function (data) {
+
+                    var da = data;
+                    debugger;
+                    document.getElementById("img1").src = data;
+
+
+                }
+            });
+        }
+
+    </script>
+</body>
+
+</html>

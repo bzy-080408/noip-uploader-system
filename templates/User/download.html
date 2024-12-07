@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>&#x8BD5;&#x9898;&#x4E0B;&#x8F7D;</title>
+
+    <link href="/static/layui/css/layui.css" rel="stylesheet" />
+    <script src="/static/layui/layui.js"></script>
+    <link href="/static/css/common.css" rel="stylesheet" />
+
+    <style type="text/css">
+        body {
+            color: #666;
+        }
+
+        .top-nav {
+            height: 55px;
+            background-color: #009688;
+            line-height: 55px;
+        }
+
+        .top-nav span {
+            font-size: 25px;
+        }
+
+        .top-location {
+            height: 40px;
+            background-color: #eeeeee;
+            line-height: 40px;
+        }
+
+        .top-location span {
+            font-size: 15px;
+        }
+
+        .acm-box {
+            height: 100%;
+            background-color: #eeeeee;
+        }
+
+        .acm-content {
+            height: 550px;
+            background-color: white;
+        }
+
+        .footer-copyright {
+            height: 80px;
+            background-color: #2F4056;
+        }
+
+        .layui-elem-quote-this {
+            border-left: solid 5px #FF5722;
+        }
+
+        .acm-left-menu li {
+            height: 40px;
+            line-height: 40px;
+            padding-left: 15px;
+            font-size: 15px;
+        }
+
+        .acm-left-menu li:hover {
+            /*  height: 40px;
+                line-height: 40px;
+                padding-left: 20px;*/
+            /* font-size: 16px;*/
+            color: #FF5722;
+            border-left: 3px solid #FF5722;
+            padding-left: 12px;
+        }
+
+        .left-menu-li-active {
+            /* font-size: 16px;*/
+            color: #FF5722;
+            border-left: 3px solid #FF5722;
+            padding-left: 12px;
+            background-color: #c2c2c2;
+        }
+
+        .notice-box {
+            padding: 20px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="">
+
+        <div class="layui-row top-nav ">
+
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+
+            <div class="layui-col-md10">
+
+                <div class="layui-row">
+
+                    <div class="layui-col-md10">
+                        <span style="color: white; ">{{ exam_name }}</span>
+                    </div>
+                    <div class="layui-col-md2">
+                        <a href="/User/LogOut"><span style="color:white; font-size:15px;">退出</span></a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+
+
+        </div>
+
+        <div class="layui-row top-location">
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+            <div class="layui-col-md10">
+                <span><i class="layui-icon layui-icon-home"></i> 首页&nbsp;> </span><span id="locationNav">考试须知</span>
+            </div>
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="layui-row acm-box">
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+            <div class="layui-col-md10 acm-content">
+
+                <div class="layui-row acm-content">
+
+                    <div class="layui-col-md2 acm-content" style="border-right: solid 1px #ccc; ">
+
+                        <div class="layui-row">
+                            <blockquote class="layui-elem-quote "
+                                style="background-color: white; border-bottom: solid 1px #ccc;">
+                                <i class="layui-icon layui-icon-log" style="color: #FF5722"></i> <span id="spanEndTime"
+                                    style="color: #FF5722"></span>
+                                <br />
+                                <i class="layui-icon layui-icon-username"></i> <span>{{ username }}</span>
+                            </blockquote>
+
+                        </div>
+
+                        <div class="layui-row">
+
+                            <div class="acm-left-menu">
+                                <ul>
+                                    <a href="/User/Notice">
+                                        <li id="liNotice" class="">
+
+
+                                            <i class="layui-icon layui-icon-speaker"></i> <span>考生须知</span>
+
+                                        </li>
+                                    </a>
+                                    <a href="/User/download">
+                                        <li id="liDownload">
+
+                                            <i class="layui-icon layui-icon-download-circle"></i> <span>试题下载</span>
+
+                                        </li>
+                                    </a>
+                                    <a href="/User/CodeUpload">
+                                        <li id="liCodeUpload">
+                                            <i class="layui-icon layui-icon-upload-drag"></i> <span>代码上传</span>
+                                        </li>
+                                    </a>
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="layui-col-md10 acm-content">
+                        <div>
+
+                            <div class="notice-box">
+                                <fieldset class="layui-elem-field">
+                                    <legend>试题下载</legend>
+                                    <div class="layui-field-box">
+                                        <div class="layui-row">
+                                            <div class="layui-col-md8">
+                                                {{ exam_name }}
+                                            </div>
+                                            <div class="layui-col-md4">
+                                                <a href="/CompetitionFiles/download.zip" download="download">
+                                                    <i class="layui-icon layui-icon-download-circle"></i> 试题下载
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="layui-row top-location ">
+            <span>&nbsp;</span>
+        </div>
+
+        <div class="layui-row  footer-copyright">
+            <span>&nbsp;</span>
+        </div>
+
+    </div>
+
+    <script src="/static/jquery/jquery.js"></script>
+
+    <script>
+
+        var menuItem = "liDownload";
+
+        //取消菜单选中
+        function setLiUnActivite() {
+            $("#liNotice").removeClass("left-menu-li-active");
+            $("#liDownload").removeClass("left-menu-li-active");
+            $("#liCodeUpload").removeClass("left-menu-li-active");
+
+        }
+
+        //设置菜单选中
+        function setLiActivite(docid) {
+
+            switch (menuItem) {
+                case "liNotice":
+                    $("#liNotice").addClass("left-menu-li-active");
+
+                    document.getElementById("locationNav").innerHTML = "考生须知";
+                    break;
+                case "liDownload":
+                    $("#liDownload").addClass("left-menu-li-active");
+                    document.getElementById("locationNav").innerHTML = "试题下载";
+                    break;
+
+                case "liCodeUpload":
+                    $("#liCodeUpload").addClass("left-menu-li-active");
+                    document.getElementById("locationNav").innerHTML = "代码上传";
+                    break;
+                default:
+                    $("#liNotice").addClass("left-menu-li-active");
+                    document.getElementById("locationNav").value = "考生须知";
+            }
+        }
+
+
+        $(function () {
+
+            setLiUnActivite();
+
+            setLiActivite(menuItem);
+
+        });
+
+
+
+
+    </script>
+
+
+    <script>
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use(['element', 'jquery', 'util', 'layer'], function () {
+            var element = layui.element;
+            var $ = layui.jquery;
+            var util = layui.util;
+            var layer = layui.layer;
+            var end_time =  '{{ end_time }}';
+            //示例
+            var dateEndTime = Date.parse(end_time);
+            // var endTime = new Date(2024, 12, 16).getTime() //假设为结束日期
+            var endTime = dateEndTime //假设为结束日期
+                , serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+            util.countdown(endTime, serverTime, function (date, serverTime, timer) {
+                var str = date[0] + '天' + date[1] + ':' + date[2] + ':' + date[3];
+                layui.$('#spanEndTime').html(str);
+                console.log(serverTime);
+                console.log(endTime);
+                
+                if (date[0] + date[1] + date[2] + date[3] == 0) {
+                    layer.alert('竞赛时间到请停止答题！', {
+                        skin: 'layui-layer-molv' //样式类名
+                        , closeBtn: 0
+                    }, function () {
+                        location.href = "/User/LogOut";
+                    });
+
+                    console.log("end");
+                }
+            });
+            //…
+        });
+    </script>
+</body>
+
+</html>

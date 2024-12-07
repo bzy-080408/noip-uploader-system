@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>&#x4EE3;&#x7801;&#x4E0A;&#x4F20;</title>
+
+    <link href="/static/layui/css/layui.css" rel="stylesheet">
+    <script src="/static/layui/layui.js"></script>
+    <link href="/static/css/common.css" rel="stylesheet" />
+
+    <style type="text/css">
+        body {
+            color: #666;
+        }
+
+        .top-nav {
+            height: 55px;
+            background-color: #009688;
+            line-height: 55px;
+        }
+
+        .top-nav span {
+            font-size: 25px;
+        }
+
+        .top-location {
+            height: 40px;
+            background-color: #eeeeee;
+            line-height: 40px;
+        }
+
+        .top-location span {
+            font-size: 15px;
+        }
+
+        .acm-box {
+            height: 100%;
+            background-color: #eeeeee;
+        }
+
+        .acm-content {
+            height: 550px;
+            background-color: white;
+        }
+
+        .footer-copyright {
+            height: 80px;
+            background-color: #2F4056;
+        }
+
+        .layui-elem-quote-this {
+            border-left: solid 5px #FF5722;
+        }
+
+        .acm-left-menu li {
+            height: 40px;
+            line-height: 40px;
+            padding-left: 15px;
+            font-size: 15px;
+        }
+
+        .acm-left-menu li:hover {
+            /*  height: 40px;
+                line-height: 40px;
+                padding-left: 20px;*/
+            /* font-size: 16px;*/
+            color: #FF5722;
+            border-left: 3px solid #FF5722;
+            padding-left: 12px;
+        }
+
+        .left-menu-li-active {
+            /* font-size: 16px;*/
+            color: #FF5722;
+            border-left: 3px solid #FF5722;
+            padding-left: 12px;
+            background-color: #c2c2c2;
+        }
+
+        .notice-box {
+            padding: 20px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="">
+
+        <div class="layui-row top-nav ">
+
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+
+            <div class="layui-col-md10">
+
+                <div class="layui-row">
+
+                    <div class="layui-col-md10">
+                        <span style="color: white; ">{{ exam_name }}</span>
+                    </div>
+                    <div class="layui-col-md2">
+                        <a href="/User/LogOut"><span style="color:white; font-size:15px;">退出</span></a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+
+
+        </div>
+
+        <div class="layui-row top-location">
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+            <div class="layui-col-md10">
+                <span><i class="layui-icon layui-icon-home"></i> 首页&nbsp;> </span><span id="locationNav">考试须知</span>
+            </div>
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="layui-row acm-box">
+
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+            <div class="layui-col-md10 acm-content">
+
+                <div class="layui-row acm-content">
+
+                    <div class="layui-col-md2 acm-content" style="border-right: solid 1px #ccc; ">
+
+                        <div class="layui-row">
+                            <blockquote class="layui-elem-quote "
+                                style="background-color: white; border-bottom: solid 1px #ccc;">
+                                <i class="layui-icon layui-icon-log" style="color: #FF5722"></i> <span id="spanEndTime"
+                                    style="color: #FF5722"></span>
+                                <br />
+                                <i class="layui-icon layui-icon-username"></i> <span>{{ username }}</span>
+                            </blockquote>
+
+                        </div>
+
+                        <div class="layui-row">
+
+                            <div class="acm-left-menu">
+                                <ul>
+                                    <a href="/User/Notice">
+                                        <li id="liNotice" class="">
+
+
+                                            <i class="layui-icon layui-icon-speaker"></i> <span>考生须知</span>
+
+                                        </li>
+                                    </a>
+                                    <a href="/User/download">
+                                        <li id="liDownload">
+
+                                            <i class="layui-icon layui-icon-download-circle"></i> <span>试题下载</span>
+
+                                        </li>
+                                    </a>
+                                    <a href="/User/CodeUpload">
+                                        <li id="liCodeUpload">
+                                            <i class="layui-icon layui-icon-upload-drag"></i> <span>代码上传</span>
+                                        </li>
+                                    </a>
+
+
+                                </ul>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="layui-col-md10 acm-content">
+                        <div>
+
+                            <div class="notice-box">
+                                <fieldset class="layui-elem-field">
+                                    <legend>代码上传</legend>
+                                    <div class="layui-field-box">
+                                        <div>
+
+                                            <span style="font-size: 16px; color: #FF5722"> <i class="layui-icon">
+                                                    &#xe667;</i> *每次只能上传一个文件,文件名必须以.C或者.CPP结尾，上传文件名称必须与试题名称保持一致。</span>
+                                            <br />
+                                            <span style="font-size: 16px; color: #FF5722"> <i class="layui-icon">
+                                                    &#xe667;</i> *上传步骤：先点击选择按钮，再点击上传才能完成上传按钮代码操作。</span>
+
+
+                                            <table class="layui-table">
+                                                <colgroup>
+                                                    <col width="65">
+                                                    <col>
+                                                    <col>
+                                                    <col>
+                                                    <col width="250">
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th>序号</th>
+                                                        <th>试题名称</th>
+                                                        <th>上传状态</th>
+                                                        <th>上传时间</th>
+                                                        <th>操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+
+
+
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>{{ T1name }}</td>
+                                                        <td>
+                                                            <span>{{ T1upload }}</span>
+
+                                                        </td>
+                                                        <td>
+                                                            <span>{{ T1time }}</span>
+
+                                                        </td>
+                                                        <td>
+
+                                                            <button lay-on="T1" type="button"
+                                                                class="layui-btn layui-btn-sm  layui-btn-normal viecode">
+                                                                <i class="layui-icon">&#xe705;</i> 查看
+                                                            </button>
+
+
+
+                                                            <label class="layui-btn layui-btn-sm uploadBtn">
+                                                                <input type="file" id="file" name="file"
+                                                                    style="display: none;">
+                                                                <i class="layui-icon">&#xe681;</i> 选择
+                                                                </input>
+                                                            </label>
+
+
+                                                            <button type="button" lay-on="uploader"
+                                                                class="layui-btn layui-btn-sm  class-upload">
+                                                                <i class="layui-icon">&#xe62f;</i> 上传
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>sleep</td>
+                                                        <td>
+                                                            <span>已上传</span>
+
+                                                        </td>
+                                                        <td>
+                                                            <span>2024-03-03 12:32:12</span>
+
+                                                        </td>
+                                                        <td>
+
+                                                            <button type="button" id="f30a82ee67e944c9af129756e3f2f09f"
+                                                                data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
+                                                                data-competitionID="6abc315248ce51a27d1865c6a5fcab1b"
+                                                                data-questionID="993a37517b1745489f4e49235792dd0e"
+                                                                data-itemID="f30a82ee67e944c9af129756e3f2f09f"
+                                                                class="layui-btn layui-btn-sm  layui-btn-normal viecode">
+                                                                <i class="layui-icon">&#xe705;</i> 查看
+                                                            </button>
+
+
+
+
+
+                                                            <button type="button"
+                                                                lay-data="{data: { 'id': 'f30a82ee67e944c9af129756e3f2f09f','studentID':'ef4ba24sxd25f48c89b8de6ea00cc087','competitionID':'6abc315248ce51a27d1865c6a5fcab1b','questionID':'993a37517b1745489f4e49235792dd0e' }}"
+                                                                data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
+                                                                data-competitionID="6abc315248ce51a27d1865c6a5fcab1b"
+                                                                data-questionID="993a37517b1745489f4e49235792dd0e"
+                                                                data-itemID="f30a82ee67e944c9af129756e3f2f09f"
+                                                                data-questionName="sleep"
+                                                                class="layui-btn layui-btn-sm uploadBtn">
+                                                                <i class="layui-icon">&#xe681;</i> 选择
+                                                            </button>
+
+
+                                                            <button id="f30a82ee67e944c9af129756e3f2f09f-upload"
+                                                                type="button"
+                                                                class="layui-btn layui-btn-sm  layui-btn-disabled  class-upload">
+                                                                <i class="layui-icon">&#xe62f;</i> 上传
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>timeline</td>
+                                                        <td>
+                                                            <span>已上传</span>
+
+                                                        </td>
+                                                        <td>
+                                                            <span>2024-03-03 12:54:14</span>
+
+                                                        </td>
+                                                        <td>
+
+                                                            <button type="button" id="294512f2dfea458f81e900eeb5ab143c"
+                                                                data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
+                                                                data-competitionID="6abc315248ce51a27d1865c6a5fcab1b"
+                                                                data-questionID="e131f021248f45369c3fa14dc8e4adbf"
+                                                                data-itemID="294512f2dfea458f81e900eeb5ab143c"
+                                                                class="layui-btn layui-btn-sm  layui-btn-normal viecode">
+                                                                <i class="layui-icon">&#xe705;</i> 查看
+                                                            </button>
+
+
+
+
+
+                                                            <button type="button"
+                                                                lay-data="{data: { 'id': '294512f2dfea458f81e900eeb5ab143c','studentID':'ef4ba24sxd25f48c89b8de6ea00cc087','competitionID':'6abc315248ce51a27d1865c6a5fcab1b','questionID':'e131f021248f45369c3fa14dc8e4adbf' }}"
+                                                                data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
+                                                                data-competitionID="6abc315248ce51a27d1865c6a5fcab1b"
+                                                                data-questionID="e131f021248f45369c3fa14dc8e4adbf"
+                                                                data-itemID="294512f2dfea458f81e900eeb5ab143c"
+                                                                data-questionName="timeline"
+                                                                class="layui-btn layui-btn-sm uploadBtn">
+                                                                <i class="layui-icon">&#xe681;</i> 选择
+                                                            </button>
+
+
+                                                            <button id="294512f2dfea458f81e900eeb5ab143c-upload"
+                                                                type="button"
+                                                                class="layui-btn layui-btn-sm class-upload">
+                                                                <i class="layui-icon">&#xe62f;</i> 上传
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+                                <div class="layui-row dk-flex-row-center">
+
+                                    <button type="button" id="ef4ba24sxd25f48c89b8de6ea00cc087"
+                                        data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
+                                        class="layui-btn  layui-btn-normal submitcode">
+                                        确认提交代码
+                                    </button>2024-03-03 12:31:36	￼ 查看
+            </div>
+            <div class="layui-col-md1">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+
+        <div class="layui-row top-location ">
+            <span>&nbsp;</span>
+        </div>
+
+        <div class="layui-row  footer-copyright">
+            <span>&nbsp;</span>
+        </div>
+
+    </div>
+</body>
+<script>
+    layui.use(function () {
+        var layer = layui.layer;
+        var util = layui.util;
+        // 事件
+        
+        util.on('lay-on', {
+            'uploader': function () {
+                console.log(file);
+                var fileInput = document.getElementById('file');
+                var file = fileInput.files[0];
+
+                if (file) {
+                    var formData = new FormData();
+                    formData.append('file', file);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/upload', true);
+                    xhr.onload = function () {
+                        if (xhr.status == 200) {
+                            alert('文件上传成功');
+                        } else {
+                            alert('文件上传失败');
+                        }
+                    };
+                    xhr.send(formData);
+                } else {
+                    alert('请选择一个文件');
+                }
+            },
+        })
+    });
+</script>
+
+</html>
