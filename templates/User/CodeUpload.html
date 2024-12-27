@@ -231,7 +231,7 @@
 
                                                     <tr>
                                                         <td>1</td>
-                                                        <td>{{ T1name }}</td>
+                                                        <td>{{ problem1_name }}</td>
                                                         <td>
                                                             <span>{{ T1upload }}</span>
 
@@ -250,7 +250,7 @@
 
 
                                                             <label class="layui-btn layui-btn-sm uploadBtn">
-                                                                <input type="file" id="file" name="file"
+                                                                <input type="file" id="file1" name="file"
                                                                     style="display: none;">
                                                                 <i class="layui-icon">&#xe681;</i> 选择
                                                                 </input>
@@ -264,91 +264,103 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>2</td>
-                                                        <td>sleep</td>
+                                                        <td>1</td>
+                                                        <td>{{ problem2_name }}</td>
                                                         <td>
-                                                            <span>已上传</span>
+                                                            <span>{{ T2upload }}</span>
 
                                                         </td>
                                                         <td>
-                                                            <span>2024-03-03 12:32:12</span>
+                                                            <span>{{ T2time }}</span>
 
                                                         </td>
                                                         <td>
 
-                                                            <button type="button" id="f30a82ee67e944c9af129756e3f2f09f"
-                                                                data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
-                                                                data-competitionID="6abc315248ce51a27d1865c6a5fcab1b"
-                                                                data-questionID="993a37517b1745489f4e49235792dd0e"
-                                                                data-itemID="f30a82ee67e944c9af129756e3f2f09f"
+                                                            <button lay-on="T2" type="button"
                                                                 class="layui-btn layui-btn-sm  layui-btn-normal viecode">
                                                                 <i class="layui-icon">&#xe705;</i> 查看
                                                             </button>
 
 
 
-
-
-                                                            <button type="button"
-                                                                lay-data="{data: { 'id': 'f30a82ee67e944c9af129756e3f2f09f','studentID':'ef4ba24sxd25f48c89b8de6ea00cc087','competitionID':'6abc315248ce51a27d1865c6a5fcab1b','questionID':'993a37517b1745489f4e49235792dd0e' }}"
-                                                                data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
-                                                                data-competitionID="6abc315248ce51a27d1865c6a5fcab1b"
-                                                                data-questionID="993a37517b1745489f4e49235792dd0e"
-                                                                data-itemID="f30a82ee67e944c9af129756e3f2f09f"
-                                                                data-questionName="sleep"
-                                                                class="layui-btn layui-btn-sm uploadBtn">
+                                                            <label class="layui-btn layui-btn-sm uploadBtn">
+                                                                <input type="file" id="file2" name="file"
+                                                                    style="display: none;">
                                                                 <i class="layui-icon">&#xe681;</i> 选择
-                                                            </button>
+                                                                </input>
+                                                            </label>
 
 
-                                                            <button id="f30a82ee67e944c9af129756e3f2f09f-upload"
-                                                                type="button"
-                                                                class="layui-btn layui-btn-sm  layui-btn-disabled  class-upload">
+                                                            <button type="button" lay-on="uploader"
+                                                                class="layui-btn layui-btn-sm  class-upload">
                                                                 <i class="layui-icon">&#xe62f;</i> 上传
                                                             </button>
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td>3</td>
-                                                        <td>timeline</td>
+                                                        <td>1</td>
+                                                        <td>{{ problem3_name }}</td>
                                                         <td>
-                                                            <span>已上传</span>
+                                                            <span>{{ T3upload }}</span>
 
                                                         </td>
                                                         <td>
-                                                            <span>2024-03-03 12:54:14</span>
+                                                            <span>{{ T3time }}</span>
 
                                                         </td>
                                                         <td>
 
-                                                            <button type="button" id="294512f2dfea458f81e900eeb5ab143c"
-                                                                data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
-                                                                data-competitionID="6abc315248ce51a27d1865c6a5fcab1b"
-                                                                data-questionID="e131f021248f45369c3fa14dc8e4adbf"
-                                                                data-itemID="294512f2dfea458f81e900eeb5ab143c"
+                                                            <button lay-on="T3" type="button"
                                                                 class="layui-btn layui-btn-sm  layui-btn-normal viecode">
                                                                 <i class="layui-icon">&#xe705;</i> 查看
                                                             </button>
 
 
 
-
-
-                                                            <button type="button"
-                                                                lay-data="{data: { 'id': '294512f2dfea458f81e900eeb5ab143c','studentID':'ef4ba24sxd25f48c89b8de6ea00cc087','competitionID':'6abc315248ce51a27d1865c6a5fcab1b','questionID':'e131f021248f45369c3fa14dc8e4adbf' }}"
-                                                                data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
-                                                                data-competitionID="6abc315248ce51a27d1865c6a5fcab1b"
-                                                                data-questionID="e131f021248f45369c3fa14dc8e4adbf"
-                                                                data-itemID="294512f2dfea458f81e900eeb5ab143c"
-                                                                data-questionName="timeline"
-                                                                class="layui-btn layui-btn-sm uploadBtn">
+                                                            <label class="layui-btn layui-btn-sm uploadBtn">
+                                                                <input type="file" id="file3" name="file"
+                                                                    style="display: none;">
                                                                 <i class="layui-icon">&#xe681;</i> 选择
+                                                                </input>
+                                                            </label>
+
+
+                                                            <button type="button" lay-on="uploader"
+                                                                class="layui-btn layui-btn-sm  class-upload">
+                                                                <i class="layui-icon">&#xe62f;</i> 上传
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>{{ problem4_name }}</td>
+                                                        <td>
+                                                            <span>{{ T4upload }}</span>
+
+                                                        </td>
+                                                        <td>
+                                                            <span>{{ T4time }}</span>
+
+                                                        </td>
+                                                        <td>
+
+                                                            <button lay-on="T4" type="button"
+                                                                class="layui-btn layui-btn-sm  layui-btn-normal viecode">
+                                                                <i class="layui-icon">&#xe705;</i> 查看
                                                             </button>
 
 
-                                                            <button id="294512f2dfea458f81e900eeb5ab143c-upload"
-                                                                type="button"
-                                                                class="layui-btn layui-btn-sm class-upload">
+
+                                                            <label class="layui-btn layui-btn-sm uploadBtn">
+                                                                <input type="file" id="file4" name="file"
+                                                                    style="display: none;">
+                                                                <i class="layui-icon">&#xe681;</i> 选择
+                                                                </input>
+                                                            </label>
+
+
+                                                            <button type="button" lay-on="uploader"
+                                                                class="layui-btn layui-btn-sm  class-upload">
                                                                 <i class="layui-icon">&#xe62f;</i> 上传
                                                             </button>
                                                         </td>
@@ -360,14 +372,6 @@
                                     </div>
                                 </fieldset>
 
-                                <div class="layui-row dk-flex-row-center">
-
-                                    <button type="button" id="ef4ba24sxd25f48c89b8de6ea00cc087"
-                                        data-studentID="ef4ba24sxd25f48c89b8de6ea00cc087"
-                                        class="layui-btn  layui-btn-normal submitcode">
-                                        确认提交代码
-                                    </button>2024-03-03 12:31:36	￼ 查看
-            </div>
             <div class="layui-col-md1">
                 <span>&nbsp;</span>
             </div>
@@ -382,6 +386,43 @@
         </div>
 
     </div>
+
+
+    <script>
+        //注意：导航 依赖 element 模块，否则无法进行功能性操作
+        layui.use(['element', 'jquery', 'util', 'layer'], function () {
+            var element = layui.element;
+            var $ = layui.jquery;
+            var util = layui.util;
+            var layer = layui.layer;
+            var end_time =  '{{ end_time }}';
+            //示例
+            var dateEndTime = Date.parse(end_time);
+            // var endTime = new Date(2024, 12, 16).getTime() //假设为结束日期
+            var endTime = dateEndTime //假设为结束日期
+                , serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+            util.countdown(endTime, serverTime, function (date, serverTime, timer) {
+                var str = date[0] + '天' + date[1] + ':' + date[2] + ':' + date[3];
+                layui.$('#spanEndTime').html(str);
+                console.log(serverTime);
+                console.log(endTime);
+                
+                if (date[0] + date[1] + date[2] + date[3] == 0) {
+                    layer.alert('竞赛时间到请停止答题！', {
+                        skin: 'layui-layer-molv' //样式类名
+                        , closeBtn: 0
+                    }, function () {
+                        location.href = "/User/LogOut";
+                    });
+
+                    console.log("end");
+                }
+            });
+            //…
+        });
+    </script>
+
 </body>
 <script>
     layui.use(function () {
@@ -391,9 +432,22 @@
         
         util.on('lay-on', {
             'uploader': function () {
-                console.log(file);
-                var fileInput = document.getElementById('file');
+                //console.log(file);
+                var fileInput = document.getElementById('file1');
                 var file = fileInput.files[0];
+                if(!file){
+                    var fileInput = document.getElementById('file2');
+                    var file = fileInput.files[0];
+                }
+                if(!file){
+                    var fileInput = document.getElementById('file13');
+                    var file = fileInput.files[0];
+                }
+                if(!file){
+                    var fileInput = document.getElementById('file4');
+                    var file = fileInput.files[0];
+                }
+                
 
                 if (file) {
                     var formData = new FormData();

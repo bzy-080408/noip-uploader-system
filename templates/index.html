@@ -45,7 +45,7 @@
                 <span>考号：</span>
             </div>
             <div class="layui-col-md3">
-                <a href="/CompetitionFiles/download.zip" download="download">
+                <a href="/static/download.zip" download="download">
                     <i class="icon icon-download"></i>
                     <span class="font-title-download" style="">试题下载</span>
                 </a>
@@ -56,7 +56,7 @@
     </div>
 
 
-    <div class="login-mid clearfix" style="        background-image: url('./css/dengpan/img/background1.jpeg');
+    <div class="login-mid clearfix" style="        background-image: url('/static/jpeg/background1.jpeg');
 ">
         <div class="block">
 
@@ -72,7 +72,7 @@
 
             <div class="login-notice  layui-form">
                 <h2>考试须知</h2>
-                <h3> {{ emsg }}</h3>
+                <span>{{ exam_message }}</span>
                 <div style="margin:10px">
 
 

@@ -17,7 +17,7 @@ import uuid
 
 import os
 import csv
-
+import time
 
 app = Flask(__name__)  # 创建 Flask 应用
 
@@ -37,13 +37,27 @@ USERS = [ # 用户数据，TEST_USER为测试用户
     },
 ]
 
-exam_name = "CCF河南省选Day1" # 比赛名称
-exam_end_time = "2099/12/7 08:50:00" # 结束时间
+# ****************************************************
+# 比赛配置
+# ****************************************************
 
-problem1_name = "T1" #第1题名称
-problem2_name = "T2" #第2题名称
-problem3_name = "T3" #第3题名称
-problem4_name = "T4" #第4题名称
+exam_name = "12.26模拟赛" # 比赛名称
+exam_end_time = "2024/12/27 17:50:00" # 结束时间
+exam_message = "密码:memory@2024" # 消息
+problem1_name = "flower" # 第1题名称
+problem2_name = "art" # 第2题名称
+problem3_name = "contest" # 第3题名称
+problem4_name = "plat" # 第3题名称
+debug_flag = False # 是否开启测试测试,生产环境建议False
+server_host = '127.0.0.1' # 服务器ip
+
+# Linux服务器注意:
+# 若运行后提示没有权限(Permission denied),请以root安装requirements并启动
+
+server_port = '5050' # 网站端口,默认HTTP为80,不建议启用HTTPS并使用443端口
+
+
+
 def create_user(user_name, password):
     """创建一个用户"""
     user = {
@@ -120,7 +134,7 @@ def load_user(user_id):
 #     if form.validate_on_submit():
 #         user_name = form.username.data
 #         password = form.password.data
-
+#
 #         user_info = get_user(user_name)  # 用用户名获取用户信息
 #         if user_info is None:
 #             create_user(user_name, password)  # 如果不存在则创建用户
@@ -146,28 +160,52 @@ def login():
             user = User(user_info)
             if user.verify_password(password):
                 login_user(user)
-                return render_template('/User/Notice.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time)
+                return render_template('/User/Notice.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time, exam_message=exam_message)
             else:
                 #emsg = "用户名或密码密码有误"
                 return "<script> alert(\"准考证号、身份证号或密码有误！\");window.open(\"/\");</script>"
-    return render_template('index.html', form=form, emsg=emsg)
+    return render_template('index.html', form=form, emsg=emsg, exam_message=exam_message)
 
 @app.route('/')  # 首页
 # @login_required  # 需要登录才能访问
 def index():
     #return render_template('index.html', username=current_user.username)
-    return render_template('index.html', exam_name=exam_name)
+    return render_template('index.html', exam_name=exam_name, exam_message=exam_message)
 
 @app.route('/static')
 def staticfile(filename):
     return render_template('static/', filename)
 
+
+# 代码下载更换到/static
+# @app.route('/CompetitionFiles') 
+# def paperfile(filename):
+#     return render_template('./CompetitionFiles/', filename)
+
+
 @app.route('/User/CodeUpload')
 @login_required
 def CodeUpload():
-    codepath = "uploads/" +  current_user.username + "/";
+    codepath = "uploads/" +  current_user.username + "/"
+    T1upload = os.path.exists(codepath + problem1_name + '/' + problem1_name + ".cpp")
+    T2upload = os.path.exists(codepath + problem2_name + '/' + problem2_name + ".cpp")
+    T3upload = os.path.exists(codepath + problem3_name + '/' + problem3_name + ".cpp")
+    T4upload = os.path.exists(codepath + problem4_name + '/' + problem4_name + ".cpp")
+    T1time = "None" # 默认时间军均为time 
+    T2time = "None" 
+    T3time = "None" 
+    T4time = "None" 
+    # 请务必确保服务器时间准确
+    if T1upload:
+        T1time =  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(codepath + problem1_name + '/' + problem1_name + ".cpp")))
+    if T2upload:
+        T2time =  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(codepath + problem2_name + '/' + problem2_name + ".cpp")))
+    if T3upload:
+        T3time =  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(codepath + problem3_name + '/' + problem3_name + ".cpp")))
+    if T4upload:
+        T4time =  time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(os.path.getctime(codepath + problem4_name + '/' + problem4_name + ".cpp")))
     # os.path.exists(codepath);
-    return render_template('/User/CodeUpload.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time)
+    return render_template('/User/CodeUpload.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time, problem1_name=problem1_name, problem2_name=problem2_name, problem3_name=problem3_name, problem4_name=problem4_name, T1upload=T1upload, T2upload=T2upload, T3upload=T3upload, T4upload=T4upload, T1time=T1time, T2time=T2time, T3time=T3time, T4time=T4time)
 
 @app.route('/User/download')
 @login_required
@@ -177,7 +215,7 @@ def download():
 @app.route('/User/Notice')
 @login_required
 def Notice():
-    return render_template('/User/Notice.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time)
+    return render_template('/User/Notice.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time, exam_message=exam_message)
 
 
 @app.route('/User/LogOut')  # 登出
@@ -191,17 +229,28 @@ def logout():
 @app.route('/upload', methods=['POST'])
 @login_required
 def upload_file():
+    uppath = "uploads/" +  current_user.username + "/"
+
     if 'file' not in request.files:
         return '无文件部分'
-
     file = request.files['file']
 
-    if file.filename == '':
-        return '没有可选择的文件'
 
+    if file.filename == problem1_name + ".cpp":
+        uppath += problem1_name + "/"
+    elif file.filename == problem2_name + ".cpp":
+        uppath += problem2_name + "/"
+    elif file.filename == problem3_name + ".cpp":
+        uppath += problem3_name + "/"
+    elif file.filename == problem4_name + ".cpp":
+        uppath += problem4_name + "/"
+    elif file.filename == '':
+        return '没有可选择的文件'
+    else:
+        return '请确认上传文件命名是否正确' 
     if file:
         # 设置文件存储路径
-        uppath = "uploads/" +  current_user.username + "/";
+        # uppath = "uploads/" +  current_user.username + "/"
         upload_path = os.path.join(uppath , file.filename)
 
         # 检测路径是否存在，不存在则创建
@@ -214,4 +263,4 @@ def upload_file():
 
 if __name__ == '__main__':
     load_exam()
-    app.run(debug=True, port=5050, threaded=True)
+    app.run(host=server_host, debug=debug_flag, port=server_port, threaded=True)

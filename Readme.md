@@ -1,6 +1,6 @@
 # 试题存储
 
-/CompetitionFiles/download.zip
+/static/download.zip
 
 # 导入用户
 
@@ -24,3 +24,6 @@ python3 app.py
 * /static 静态文件（js,css)
 * /templates html文件目录
 * /uploads 考生代码上传目录
+
+# 上传文件的说明：
+准考证号目录下直接存放代码，针对OI赛制测评请额外新建文件夹并移动源代码
