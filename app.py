@@ -176,8 +176,9 @@ def login():
 @app.route('/')  # 首页
 # @login_required  # 需要登录才能访问
 def index():
+    user_ip = request.remote_addr
     #return render_template('index.html', username=current_user.username)
-    return render_template('index.html', exam_name=exam_name, exam_message=exam_message)
+    return render_template('index.html', user_ip=user_ip, exam_name=exam_name, exam_message=exam_message)
 
 @app.route('/static')
 def staticfile(filename):
