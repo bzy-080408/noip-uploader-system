@@ -259,7 +259,7 @@ def upload_file():
 
         # 存储文件
         file.save(upload_path)
-        return '文件已上传'
+        return '文件上传成功'
 
 if __name__ == '__main__':
     load_exam()
