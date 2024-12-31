@@ -1,4 +1,3 @@
-# Copyright (c) 2024 Luoyang Foreign Language School
 # Copyright (C) 2024 bzy-080408<Bzy080408@outlook.com>
 
 from gevent import pywsgi
