@@ -42,13 +42,13 @@ USERS = [ # 用户数据，TEST_USER为测试用户
 # ****************************************************
 
 exam_name = "12.26模拟赛" # 比赛名称
-exam_end_time = "2024/12/27 17:50:00" # 结束时间
+exam_end_time = "2099/12/27 17:50:00" # 结束时间
 exam_message = "密码:memory@2024" # 消息
 problem1_name = "flower" # 第1题名称
 problem2_name = "art" # 第2题名称
 problem3_name = "contest" # 第3题名称
 problem4_name = "plat" # 第3题名称
-debug_flag = False # 是否开启测试测试,生产环境建议False
+debug_flag = True # 是否开启测试测试,生产环境建议False
 server_host = '127.0.0.1' # 服务器ip
 
 # Linux服务器注意:

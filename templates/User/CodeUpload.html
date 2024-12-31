@@ -405,8 +405,9 @@
             util.countdown(endTime, serverTime, function (date, serverTime, timer) {
                 var str = date[0] + '天' + date[1] + ':' + date[2] + ':' + date[3];
                 layui.$('#spanEndTime').html(str);
-                console.log(serverTime);
-                console.log(endTime);
+                // debug only
+                // console.log(serverTime);
+                // console.log(endTime);
                 
                 if (date[0] + date[1] + date[2] + date[3] == 0) {
                     layer.alert('竞赛时间到请停止答题！', {
@@ -440,7 +441,7 @@
                     var file = fileInput.files[0];
                 }
                 if(!file){
-                    var fileInput = document.getElementById('file13');
+                    var fileInput = document.getElementById('file3');
                     var file = fileInput.files[0];
                 }
                 if(!file){
@@ -458,7 +459,7 @@
                         if (xhr.status == 200) {
                             alert('文件上传成功');
                         } else {
-                            alert('文件上传失败');
+                            alert('文件上传失败,请检查文件名称是否错误');
                         }
                     };
                     xhr.send(formData);
