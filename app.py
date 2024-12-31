@@ -1,6 +1,8 @@
 # Copyright (c) 2024 Luoyang Foreign Language School
 # Copyright (C) 2024 bzy-080408<Bzy080408@outlook.com>
 
+from gevent import pywsgi
+
 from flask import Flask, render_template, redirect, url_for, request
 
 from flask_wtf import FlaskForm
@@ -48,8 +50,9 @@ problem1_name = "flower" # 第1题名称
 problem2_name = "art" # 第2题名称
 problem3_name = "contest" # 第3题名称
 problem4_name = "plat" # 第3题名称
-debug_flag = True # 是否开启测试测试,生产环境建议False
+debug_flag = False # 是否开启测试测试,生产环境建议False
 server_host = '127.0.0.1' # 服务器ip
+max_code_size = 100 #最大上传代码大小，单位为kb
 
 # Linux服务器注意:
 # 若运行后提示没有权限(Permission denied),请以root安装requirements并启动
@@ -68,6 +71,10 @@ def create_user(user_name, password):
     USERS.append(user)
 
 def load_exam():
+    with open('uploads/warn_user.csv', 'a') as warn_user:
+        csv_writer = csv.writer(warn_user)
+        csv_writer.writerow(['准考证号', '试图上传文件的大小(单位kb)', '试图上传的时间', 'IP地址'])
+        # warn_user.write('准考证号, 试图上传文件的大小(单位kb), \n')
     userconfig = open('config/user.csv')
     csv_reader1 = csv.reader(userconfig)
     for line in csv_reader1:
@@ -234,8 +241,15 @@ def upload_file():
     if 'file' not in request.files:
         return '无文件部分'
     file = request.files['file']
+    file_size = file.seek(0, os.SEEK_END) / 1024 # 获取上传文件的大小，单位为kb
 
+    if file_size > max_code_size: 
+        with open('uploads/warn_user.csv', 'a') as warn_user:
+            csv_writer = csv.writer(warn_user) # 以csv格式写入
+            user_ip = request.remote_addr
+            csv_writer.writerow([current_user.username, file_size, time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()), user_ip]) #准考证号，文件大小，上传时间
 
+        return '警告:请遵守比赛要求，严禁提交非代码文件'
     if file.filename == problem1_name + ".cpp":
         uppath += problem1_name + "/"
     elif file.filename == problem2_name + ".cpp":
@@ -263,4 +277,9 @@ def upload_file():
 
 if __name__ == '__main__':
     load_exam()
-    app.run(host=server_host, debug=debug_flag, port=server_port, threaded=True)
+    if debug_flag:
+        app.run(host=server_host, debug=debug_flag, port=server_port, threaded=True)
+    else: 
+        server = pywsgi.WSGIServer((server_host, int(server_port)), app)
+        server.serve_forever()
+    
