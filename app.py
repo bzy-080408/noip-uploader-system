@@ -60,6 +60,12 @@ server_port = '5050' # 网站端口,默认HTTP为80,不建议启用HTTPS并使�
 
 
 
+
+# ****************************************************
+# create_user: 创建用户
+# 传入参数: 用户名，密码
+# ****************************************************
+
 def create_user(user_name, password):
     """创建一个用户"""
     user = {
@@ -68,6 +74,11 @@ def create_user(user_name, password):
         "id": uuid.uuid4()
     }
     USERS.append(user)
+
+
+# ****************************************************
+# load_exam: 加载考试相关数据
+# ****************************************************
 
 def load_exam():
     with open('uploads/warn_user.csv', 'a') as warn_user:
@@ -80,12 +91,21 @@ def load_exam():
         create_user(line[0],line[1])
     #    print(line[2])
 
+
+# ****************************************************
+# get_user: 根据用户名获得用户记录
+# 传入参数: 用户名
+# ****************************************************
+
 def get_user(user_name):
-    """根据用户名获得用户记录"""
     for user in USERS:
         if user.get("name") == user_name:
             return user
     return None
+
+# ****************************************************
+# 预定义class
+# ****************************************************
 
 class LoginForm(FlaskForm):
     """登录表单类"""
@@ -128,10 +148,19 @@ class User(UserMixin):
                 return User(user)
         return None
 
+
+# ****************************************************
+# load_user: 定义获取登录用户的方法
+# ****************************************************
+
 @login_manager.user_loader  # 定义获取登录用户的方法
 def load_user(user_id):
     return User.get(user_id)
 
+# ****************************************************
+# singup: 创建用户
+# 因用户使用加载csv表格创建，故此函数弃用
+# ****************************************************
 
 # @app.route('/signup/', methods=('GET', 'POST'))  # 注册
 # def signup():
@@ -148,6 +177,12 @@ def load_user(user_id):
 #         else:
 #             emsg = "用户名已存在"  # 如果用户已存在则给出错误提示
 #     return render_template('signup.html', form=form, emsg=emsg)
+
+
+# ****************************************************
+# API_login: 登陆校验API
+# 通过POST传递参数, 身份证校验暂时弃用 
+# ****************************************************
 
 @app.route('/login', methods=['POST'])  # 登录
 def login():
@@ -172,6 +207,11 @@ def login():
                 return "<script> alert(\"准考证号、身份证号或密码有误！\");window.open(\"/\");</script>"
     return render_template('index.html', form=form, emsg=emsg, exam_message=exam_message)
 
+
+# ****************************************************
+# Route_index: 根目录渲染
+# ****************************************************
+
 @app.route('/')  # 首页
 # @login_required  # 需要登录才能访问
 def index():
@@ -179,15 +219,29 @@ def index():
     #return render_template('index.html', username=current_user.username)
     return render_template('index.html', user_ip=user_ip, exam_name=exam_name, exam_message=exam_message)
 
+
+# ****************************************************
+# Route_static: 静态文件目录
+# ****************************************************
+
 @app.route('/static')
 def staticfile(filename):
     return render_template('static/', filename)
 
 
-# 代码下载更换到/static
+# ****************************************************
+# Route_CompetitionFiles: 试题下载目录
+# 代码下载更换到/static，故本函数弃用
+# ****************************************************
+
 # @app.route('/CompetitionFiles') 
 # def paperfile(filename):
 #     return render_template('./CompetitionFiles/', filename)
+
+
+# ****************************************************
+# Route_User/CodeUpload: 代码上传页面
+# ****************************************************
 
 
 @app.route('/User/CodeUpload')
@@ -214,10 +268,20 @@ def CodeUpload():
     # os.path.exists(codepath);
     return render_template('/User/CodeUpload.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time, problem1_name=problem1_name, problem2_name=problem2_name, problem3_name=problem3_name, problem4_name=problem4_name, T1upload=T1upload, T2upload=T2upload, T3upload=T3upload, T4upload=T4upload, T1time=T1time, T2time=T2time, T3time=T3time, T4time=T4time)
 
+
+# ****************************************************
+# Route_User/dowload: 试题下载页面
+# ****************************************************
+
 @app.route('/User/download')
 @login_required
 def download():
     return render_template('/User/download.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time)
+
+
+# ****************************************************
+# Route_User/Notice: 考生须知页面
+# ****************************************************
 
 @app.route('/User/Notice')
 @login_required
@@ -225,12 +289,21 @@ def Notice():
     return render_template('/User/Notice.html', username=current_user.username, exam_name=exam_name, end_time=exam_end_time, exam_message=exam_message)
 
 
+# ****************************************************
+# Route_User/LogOut: 退出登陆页面
+# ****************************************************
+
 @app.route('/User/LogOut')  # 登出
 @login_required
 def logout():
     logout_user()
     return render_template('index.html', exam_name=exam_name)
     # return redirect(url_for('index.html'))
+
+
+# ****************************************************
+# API_upload: 文件上传API
+# ****************************************************
 
 
 @app.route('/upload', methods=['POST'])
@@ -274,6 +347,11 @@ def upload_file():
         # 存储文件
         file.save(upload_path)
         return '文件上传成功'
+
+
+# ****************************************************
+# 主函数
+# ****************************************************
 
 if __name__ == '__main__':
     load_exam()
